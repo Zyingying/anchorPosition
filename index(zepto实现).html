@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="http://m.youlanw.com/static/css/main.css?v=20170330" />
+		<style>
+			.anchor-nav li {
+				display: inline-block;
+				text-align: center;
+				float: left;
+				width: 33.33%;
+				height: 45px;
+				line-height: 45px;
+			}
+			
+			.anchor-nav li.current {
+				border-bottom: 2px solid green;
+			}
+			
+			.anchor-nav {
+				position: static;
+				top: 0;
+				z-index: 999;
+				width: 100%;
+				border-bottom: 1px solid #ddd;
+				background-color: #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div style="height: 800px;"></div>
+		<ul class="anchor-nav clearfix right-fixed">
+			<li class="cont-item-1" data-role="cont-item-1">产品详情</li>
+			<li class="cont-item-2" data-role="cont-item-2">用户评价</li>
+			<li class="cont-item-3" data-role="cont-item-3">客服联系</li>
+		</ul>
+		<div class="anchor-cont">
+			<div class="cont-item" id="cont-item-1">
+				产品详情
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+			<div class="cont-item" id="cont-item-2">
+				用户评价
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+			<div class="cont-item" id="cont-item-3">
+				客服联系
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</body>
+	<script type="text/javascript" src="http://m.youlanw.com/static/js/zepto.min.js"></script>
+
+	<script>
+		//实现zepto的scrollTop加参数无效的替代方法scrollTo
+		;
+		(function($) {
+			var DEFAULTS = {
+				endY: $.os.android ? 1 : 0,
+				duration: 200,
+				updateRate: 15
+			};
+
+			var interpolate = function(source, target, shift) {
+				return(source + (target - source) * shift);
+			};
+
+			var easing = function(pos) {
+				return(-Math.cos(pos * Math.PI) / 2) + .5;
+			};
+
+			var scroll = function(settings) {
+				var options = $.extend({}, DEFAULTS, settings);
+
+				if(options.duration === 0) {
+					window.scrollTo(0, options.endY);
+					if(typeof options.callback === 'function') options.callback();
+					return;
+				}
+
+				var startY = window.pageYOffset,
+					startT = Date.now(),
+					finishT = startT + options.duration;
+
+				var animate = function() {
+					var now = Date.now(),
+						shift = (now > finishT) ? 1 : (now - startT) / options.duration;
+
+					window.scrollTo(0, interpolate(startY, options.endY, easing(shift)));
+
+					if(now < finishT) {
+						setTimeout(animate, options.updateRate);
+					} else {
+						if(typeof options.callback === 'function') options.callback();
+					}
+				};
+
+				animate();
+			};
+
+			var scrollNode = function(settings) {
+				var options = $.extend({}, DEFAULTS, settings);
+
+				if(options.duration === 0) {
+					this.scrollTop = options.endY;
+					if(typeof options.callback === 'function') options.callback();
+					return;
+				}
+
+				var startY = this.scrollTop,
+					startT = Date.now(),
+					finishT = startT + options.duration,
+					_this = this;
+
+				var animate = function() {
+					var now = Date.now(),
+						shift = (now > finishT) ? 1 : (now - startT) / options.duration;
+
+					_this.scrollTop = interpolate(startY, options.endY, easing(shift));
+
+					if(now < finishT) {
+						setTimeout(animate, options.updateRate);
+					} else {
+						if(typeof options.callback === 'function') options.callback();
+					}
+				};
+
+				animate();
+			};
+
+			$.scrollTo = scroll;
+
+			$.fn.scrollTo = function() {
+				if(this.length) {
+					var args = arguments;
+					this.forEach(function(elem, index) {
+						scrollNode.apply(elem, args);
+					});
+				}
+			};
+		}(Zepto));
+
+		//bottom fixed
+		if($('.right-fixed').length)
+			var right_fixed_offset_top = $('.right-fixed').offset().top;
+
+		$(window).scroll(function() {
+			if($(this).scrollTop() > right_fixed_offset_top) {
+				$('.right-fixed').css({
+					'position': 'fixed',
+					'top': 0
+				})
+			} else $('.right-fixed').css({
+				'position': 'static'
+			})
+		});
+
+		/*产品详情*/
+		var top1 = $('.anchor-cont .cont-item').eq(0).offset().top;
+		var cont_item_h_1 = top1 - 100;
+		/*用户评价*/
+		var top2 = $('.anchor-cont .cont-item').eq(1).offset().top;
+		var cont_item_h_2 = top2 - 100;
+		/*客服联系*/
+		var top3 = $('.anchor-cont .cont-item').eq(2).offset().top;
+		var cont_item_h_3 = top3 - 100;
+
+		function scroll_monitor() {
+			if($(window).scrollTop() >= cont_item_h_1 - 20) {
+				$('.cont-item-1').addClass('current').siblings().removeClass('current');
+			}
+			if($(window).scrollTop() >= cont_item_h_2 - 20) {
+				$('.cont-item-2').addClass('current').siblings().removeClass('current');
+			}
+			if($(window).scrollTop() >= cont_item_h_3 - 20) {
+				$('.cont-item-3').addClass('current').siblings().removeClass('current');
+			}
+		}
+		$(window).scroll(scroll_monitor);
+		document.addEventListener('touchmove', scroll_monitor);
+
+		$('.anchor-nav li').click(function() {
+			$(this).addClass('current').siblings().removeClass('current');
+			if($(this).data('role') == 'cont-item-1') {
+				$('body,html').scrollTo({
+					endY: cont_item_h_1,
+					duration: 200,
+					callback: function() {
+						console.log('cont-item-1');
+					}
+				});
+				$('body,html').scrollTop(cont_item_h_1);
+			} else if($(this).data('role') == 'cont-item-2') {
+				$('body,html').scrollTo({
+					endY: cont_item_h_2,
+					duration: 200,
+					callback: function() {
+						console.log('cont-item-2');
+					}
+				});
+			} else if($(this).data('role') == 'cont-item-3') {
+				$('body,html').scrollTo({
+					endY: cont_item_h_3,
+					duration: 200,
+					callback: function() {
+						console.log('cont-item-3');
+					}
+				});
+			}
+		});
+	</script>
+
+</html>

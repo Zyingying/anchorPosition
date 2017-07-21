@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="http://m.youlanw.com/static/css/main.css?v=20170330" />
+		<style>
+			.anchor-nav li {
+				display: inline-block;
+				text-align: center;
+				float: left;
+				width: 33.33%;
+				height: 45px;
+				line-height: 45px;
+			}
+			
+			.anchor-nav li.current {
+				border-bottom: 2px solid green;
+			}
+			
+			.anchor-nav {
+				position: static;
+				top: 0;
+				z-index: 999;
+				width: 100%;
+				border-bottom: 1px solid #ddd;
+				background-color: #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div style="height: 800px;"></div>
+		<ul class="anchor-nav clearfix right-fixed">
+			<li class="cont-item-1" data-role="cont-item-1">产品详情</li>
+			<li class="cont-item-2" data-role="cont-item-2">用户评价</li>
+			<li class="cont-item-3" data-role="cont-item-3">客服联系</li>
+		</ul>
+		<div class="anchor-cont">
+			<div class="cont-item" id="cont-item-1">
+				产品详情
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+			<div class="cont-item" id="cont-item-2">
+				用户评价
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+			<div class="cont-item" id="cont-item-3">
+				客服联系
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</body>
+	<script src="http://sh.youlanw.com/static/js/jquery-1.11.1.min.js"></script>
+
+	<script>
+		//bottom fixed
+		if($('.right-fixed').length)
+			var right_fixed_offset_top = $('.right-fixed').offset().top;
+
+		$(window).scroll(function() {
+			if($(this).scrollTop() > right_fixed_offset_top) {
+				$('.right-fixed').css({
+					'position': 'fixed',
+					'top': 0
+				})
+			} else $('.right-fixed').css({
+				'position': 'static'
+			})
+		});
+
+		/*产品详情*/
+		var top1 = $('.anchor-cont .cont-item').eq(0).offset().top;
+		var cont_item_h_1 = top1 - 100;
+
+		function scroll_monitor1() {
+			if($(window).scrollTop() >= cont_item_h_1 - 20) {
+				$('.cont-item-1').addClass('current').siblings().removeClass('current');
+			} else return false;
+		}
+		$(window).scroll(scroll_monitor1);
+		document.addEventListener('touchmove', scroll_monitor1);
+		/*用户评价*/
+		var top2 = $('.anchor-cont .cont-item').eq(1).offset().top;
+		var cont_item_h_2 = top2 - 100;
+
+		function scroll_monitor2() {
+			if($(window).scrollTop() >= cont_item_h_2 - 20) {
+				$('.cont-item-2').addClass('current').siblings().removeClass('current');
+			} else return false;
+		}
+		$(window).scroll(scroll_monitor2);
+		document.addEventListener('touchmove', scroll_monitor2);
+		/*客服联系*/
+		var top3 = $('.anchor-cont .cont-item').eq(2).offset().top;
+		var cont_item_h_3 = top3 - 100;
+
+		function scroll_monitor3() {
+			if($(window).scrollTop() >= cont_item_h_3 - 20) {
+				$('.cont-item-3').addClass('current').siblings().removeClass('current');
+			} else return false;
+		}
+		$(window).scroll(scroll_monitor3);
+		document.addEventListener('touchmove', scroll_monitor3);
+
+		$('.anchor-nav li').click(function() {
+			$(this).addClass('current').siblings().removeClass('current');
+			if($(this).data('role') == 'cont-item-1') {
+				$('body,html').animate({
+					scrollTop: cont_item_h_1
+				}, 200);
+			} else if($(this).data('role') == 'cont-item-2') {
+				$('body,html').animate({
+					scrollTop: cont_item_h_2
+				}, 200);
+			} else if($(this).data('role') == 'cont-item-3') {
+				$('body,html').animate({
+					scrollTop: cont_item_h_3
+				}, 200);
+			}
+		});
+	</script>
+
+</html>
