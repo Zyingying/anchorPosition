@@ -270,7 +270,6 @@
 		document.addEventListener('touchmove', scroll_monitor);
 
 		$('.anchor-nav li').click(function() {
-			$(this).addClass('current').siblings().removeClass('current');
 			if($(this).data('role') == 'cont-item-1') {
 				$('body,html').scrollTo({
 					endY: cont_item_h_1,

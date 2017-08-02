@@ -192,7 +192,6 @@
 		document.addEventListener('touchmove', scroll_monitor3);
 
 		$('.anchor-nav li').click(function() {
-			$(this).addClass('current').siblings().removeClass('current');
 			if($(this).data('role') == 'cont-item-1') {
 				$('body,html').animate({
 					scrollTop: cont_item_h_1
